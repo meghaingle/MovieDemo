@@ -1,0 +1,121 @@
+﻿@model IEnumerable<MovieDemoApplication.Models.MovieModel>
+
+@{
+    ViewBag.Title = "Movie Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Movie Details</h2>
+
+<div>
+    
+    <hr />
+    @foreach (var moviedetail in Model)
+    {
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.title)
+    </dt>
+    <dd>
+        @moviedetail.title
+    </dd>
+    <br />
+    <dt>
+        @Html.DisplayNameFor(model => model.year)
+    </dt>
+
+    <dd>
+        @moviedetail.year
+    </dd>
+    <br />
+    <dt>
+        @Html.DisplayNameFor(model => model.info.directors)
+    </dt>
+    <dd>
+        @if (moviedetail.info.directors != null)
+        {
+            foreach (var director in moviedetail.info.directors)
+            {
+                <li>@director</li>
+            }
+        }
+
+    </dd>
+    <br />
+    <dt>
+        @Html.DisplayNameFor(model => model.info.release_date)
+    </dt>
+    <dd>
+        @moviedetail.info.release_date
+    </dd>
+    <br />
+    <dt>
+        @Html.DisplayNameFor(model => model.info.rating)
+    </dt>
+    <dd>
+        @moviedetail.info.rating
+    </dd>
+    <br />
+    <dt>
+        @Html.DisplayNameFor(model => model.info.genres)
+    </dt>
+    <dd>
+        @if (moviedetail.info.genres != null)
+        {
+            foreach (var genere in moviedetail.info.genres)
+            {
+                <li>@genere</li>
+            }
+        }
+
+    </dd>
+    <br />
+    <dt>
+        @Html.DisplayNameFor(model => model.info.image_url)
+    </dt>
+    <dd>
+        <img src="@Html.Raw(moviedetail.info.image_url)" alt="a description of the image"  height="400px" width="250px">
+    </dd>
+      <br />  
+    <dt>
+        @Html.DisplayNameFor(model => model.info.plot)
+    </dt>
+    <dd>
+        @moviedetail.info.plot
+
+    </dd>
+    <br /> 
+    <dt>
+        @Html.DisplayNameFor(model => model.info.rank)
+    </dt>
+    <dd>
+        @moviedetail.info.rank
+    </dd>
+    <br />    
+    <dt>
+        @Html.DisplayNameFor(model => model.info.running_time_secs)
+    </dt>
+    <dd>
+        @moviedetail.info.running_time_secs
+
+    </dd>
+    <br /> 
+    <dt>
+        @Html.DisplayNameFor(model => model.info.actors)
+    </dt>
+    <dd>
+        @if (moviedetail.info.actors != null)
+        {
+            foreach (var actor in moviedetail.info.actors)
+            {
+                <li>@actor</li>
+            }
+        }
+    </dd>
+</dl>
+    }
+    </div>
+<p>
+    
+    @Html.ActionLink("Back to List", "Index")
+</p>

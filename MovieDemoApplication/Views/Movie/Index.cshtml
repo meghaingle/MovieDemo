@@ -1,0 +1,52 @@
+﻿
+@model PagedList.IPagedList<MovieDemoApplication.Models.MovieModel>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "Movies";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Movies List</h2>
+
+@using (Html.BeginForm("Index", "Movie", FormMethod.Get))
+{
+    <p>
+        <b> Search Name:</b> @Html.TextBox("Search_Data", ViewBag.FilterValue as string)
+        <input type="submit" value="Find" class="btn btn-primary"/>
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Release Year", "Index", new { Filter_Value = ViewBag.FilterValue })
+        </th>
+        <th>
+            @Html.ActionLink("Movie Name", "Index", new { Filter_Value = ViewBag.FilterValue })
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.year)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.title)*@
+                @Html.ActionLink(item.title, "Details", "Movie", new { title = item.title }, null)
+            </td>
+            @*<td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>*@
+        </tr>
+    }
+
+</table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, Page_No => Url.Action("Index",
+    new { Page_No, Filter_Value = ViewBag.FilterValue }))
