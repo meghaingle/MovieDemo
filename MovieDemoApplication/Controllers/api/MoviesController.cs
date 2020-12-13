@@ -11,22 +11,20 @@ namespace MovieDemoApplication.Controllers.api
 {
     public class MoviesController : ApiController
     {
-        public List<MovieModel> GetJsonMovieDetails()
+        public List<MovieModel> JsonMovieDetails()
         {
-            List<MovieModel> movieList = new List<MovieModel>();
             string allText = System.IO.File.ReadAllText(@"E:\moviedata.json");
 
-            if (!String.IsNullOrEmpty(allText))
-            {
-                movieList = JsonConvert.DeserializeObject<List<MovieModel>>(allText);
 
-            }
+            var movieList = JsonConvert.DeserializeObject<List<MovieModel>>(allText);
+
+
             return movieList;
         }
 
         public IHttpActionResult GetMovieNames()
         {
-            List<MovieModel> EmpInfo = GetJsonMovieDetails();
+            List<MovieModel> EmpInfo = JsonMovieDetails();
 
             return Ok(EmpInfo);
         }

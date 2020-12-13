@@ -12,7 +12,7 @@
 @using (Html.BeginForm("Index", "Movie", FormMethod.Get))
 {
     <p>
-        <b> Search Name:</b> @Html.TextBox("Search_Data", ViewBag.FilterValue as string)
+        Search Name: @Html.TextBox("Search_Data", ViewBag.FilterValue as string)
         <input type="submit" value="Find" class="btn btn-primary"/>
     </p>
 }
