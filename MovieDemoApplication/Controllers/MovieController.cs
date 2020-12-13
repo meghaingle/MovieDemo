@@ -65,9 +65,7 @@ namespace MovieDemoApplication.Controllers
         public ActionResult Details(string title)
         {
             ViewBag.title = title;
-            Info movieInfo = null;
-           IEnumerable<MovieModel> movie = null;
-            List<MovieModel> movies = null;
+            IEnumerable<MovieModel> movie = null;
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://localhost:44329/api/");
@@ -90,7 +88,7 @@ namespace MovieDemoApplication.Controllers
                 }
                 else
                 {
-                    movieInfo = null;
+                    movie = Enumerable.Empty<MovieModel>();
                     ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
                 }
 
